@@ -72,7 +72,9 @@ def taskcli():
             tar.status = "ToDO"
             print(f"tarea {tar.id}:'{args.descripcion}' agregada a la lista")
             print(f"estado de la tarea {tar.id} : {tar.status}")
+        elif args.comando == "update":
 
+            print("")
 
     
     
