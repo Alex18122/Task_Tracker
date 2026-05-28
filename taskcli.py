@@ -1,16 +1,16 @@
 import argparse
-from datetime import date
-import json
+from datetime import datetime
+import shlex
 from typing import Optional
-from pydantic import BaseModel
+from pydantic import BaseModel , Field
 
 
 class Data(BaseModel):
-    id: Optional[str] = None
-    description: Optional[str] = None
+    id: int
+    description: str
     status: str
-    createdAt: date
-    udatedAt: date
+    createdAt: datetime = Field(default_factory=datetime.now)
+    udatedAt: Optional[datetime] = None
 
 false_db = []
 
@@ -47,10 +47,32 @@ def comandos_entrada_parser(data: Data):
 
 parser = comandos_entrada_parser(Data)
    
+def agregar_tarea(descripcion: str,tarea: Data = None):
+    
+    global contador_id
+    tarea.id = contador_id +1
+    tarea.description = descripcion
+    tarea.status = "todo"
+    false_db.append(tarea)
+    return tarea
 
 def taskcli():
 
     print("Administrador De Tareas")
     print("----------------------------------------------------------------------------------------------")
+    
+    while True:
+        entrada = input(">> ")
+        partes = shlex.split(entrada) # divide la entrada en partes, respetando las comillas
+        args = parser.parse_args(partes[1:]) #parsea las partes de la entrada, omitiendo el primer elemento que es "task-cli"
+
+        if args.comando == "add":
+
+            tar= agregar_tarea(args.desripcion)
+            tar.status = "ToDO"
+            print(f"tarea {tar.id}:'{args.descripcion}' agregada a la lista")
+            print(f"estado de la tarea {tar.id} : {tar.status}")
+
+
     
     
