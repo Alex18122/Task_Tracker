@@ -1,9 +1,11 @@
 import argparse
 from datetime import datetime
 import shlex
+from tkinter import S
 from typing import Optional
 from pydantic import BaseModel , Field
 
+contador_id = 1
 
 class Data(BaseModel):
     id: int
@@ -44,31 +46,33 @@ def comandos_entrada_parser(data: Data):
     mark_done_parser = subparser.add_parser("mark-done", help = "marca una tarea como hecha")
     mark_done_parser.add_argument("id", help = "escribir el id de la tarea a marcar como hecha")
 
+    return parser
+
 
 parser = comandos_entrada_parser(Data)
    
-def agregar_tarea(descripcion: str,tarea: Data = None):
+def agregar_tarea(descripcion: str):
     
-    global contador_id
-    tarea.id = contador_id +1
-    tarea.description = descripcion
-    tarea.status = "todo"
+    global contador_id 
+    tarea = Data(id=contador_id, description= descripcion,status="ToDo")
+    
     false_db.append(tarea)
+    
     return tarea
 
 def taskcli():
 
     print("Administrador De Tareas")
-    print("----------------------------------------------------------------------------------------------")
+    print("---------------------------------------------------------------")
     
     while True:
         entrada = input(">> ")
         partes = shlex.split(entrada) # divide la entrada en partes, respetando las comillas
-        args = parser.parse_args(partes[1:]) #parsea las partes de la entrada, omitiendo el primer elemento que es "task-cli"
+        args = parser.parse_args(partes[1:] ) #parsea las partes de la entrada, omitiendo el primer elemento que es "task-cli"
 
         if args.comando == "add":
 
-            tar= agregar_tarea(args.desripcion)
+            tar= agregar_tarea(args.descripcion)
             tar.status = "ToDO"
             print(f"tarea {tar.id}:'{args.descripcion}' agregada a la lista")
             print(f"estado de la tarea {tar.id} : {tar.status}")
@@ -76,5 +80,6 @@ def taskcli():
 
             print("")
 
+taskcli()
     
     
