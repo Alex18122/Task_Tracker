@@ -12,7 +12,7 @@ class Data(BaseModel):
     description: str
     status: str
     createdAt: datetime = Field(default_factory=datetime.now)
-    udatedAt: Optional[datetime] = None
+    updatedAt: Optional[datetime] = None
 
 false_db = []
 
@@ -57,8 +57,20 @@ def agregar_tarea(descripcion: str):
     tarea = Data(id=contador_id, description= descripcion,status="ToDo")
     
     false_db.append(tarea)
-    
+
     return tarea
+
+def modificar_tarea(id: int, descripcion: str):
+
+    for tarea in false_db:
+        if tarea.id == id:
+            tarea.description = descripcion
+            tarea.updatedAt = datetime.now()
+            index = false_db[tarea].index
+            false_db[index]
+            print(false_db[index])
+            return tarea
+
 
 def taskcli():
 
@@ -73,12 +85,12 @@ def taskcli():
         if args.comando == "add":
 
             tar= agregar_tarea(args.descripcion)
-            tar.status = "ToDO"
             print(f"tarea {tar.id}:'{args.descripcion}' agregada a la lista")
             print(f"estado de la tarea {tar.id} : {tar.status}")
         elif args.comando == "update":
 
-            print("")
+            tar = modificar_tarea(args.id, args.descripcion)
+            print(false_db)
 
 taskcli()
     
