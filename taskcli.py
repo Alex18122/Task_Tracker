@@ -8,7 +8,7 @@ contador_id = 1
 
 
 class Data(BaseModel):
-    
+
     id: int
     description: str
     status: str
@@ -62,7 +62,6 @@ def agregar_tarea(descripcion: str):
 
     false_db.append(tarea)
     contador_id += 1
-
     return tarea
 
 
@@ -85,7 +84,16 @@ def listar_tareas():
 
     for tarea in false_db:
 
-        print(tarea)
+        print("Lista de tareas")
+
+        print(f"id : {tarea.id}")
+        print(f"Tarea : {tarea.description}")
+        print(f"Estado : {tarea.status}")
+        print(f"fecha de creacion : {tarea.createdAt}")
+        
+        if tarea.updatedAt is not None:
+
+            print(f"Fecha de modificacion : {tarea.updatedAt}")
 
 def taskcli():
 
