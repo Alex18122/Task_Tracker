@@ -42,8 +42,8 @@ def comandos_entrada_parser(data: Data):
     delete_parser.add_argument("id", type=int, help="escribir el id de la tarea a eliminar")
 
     # task-cli mark-in-progress 1
-    mark_in_progress_parser = subparser.add_parser("mark-in-progress", help="marca una tarea como en progreso")
-    mark_in_progress_parser.add_argument("id", type=int, help="escribir el id de la tarea a marcar como en progreso")
+    mark_in_progress_parser = subparser.add_parser("mark-in-progress", help="marca una tarea como 'en progreso'")
+    mark_in_progress_parser.add_argument("id", type=int, help="escribir el id de la tarea a marcar como 'en progreso'")
 
     # task-cli mark-done 1
     mark_done_parser = subparser.add_parser("mark-done", help="marca una tarea como hecha")
@@ -99,11 +99,41 @@ def marcar_tarea_hecha(id: int):
 
     for tarea in false_db:
 
+        conta = 0
+
         if tarea.id == id:
 
             tarea.status = "Done"
             false_db[id - 1] = tarea
             print(f"Tarea {tarea.id} marcada como hecha ")
+
+        else:
+
+            conta += 1
+
+            if conta == len(false_db):
+
+                print("Tarea no encontrada.")
+
+def marcar_tarea_en_progreso(id: int):
+
+    for tarea in false_db:
+
+        conta = 0
+
+        if tarea.id == id:
+
+            tarea.status = "In Progress"
+            false_db[id - 1] = tarea
+            print(f"Tarea {tarea.id} marcada como 'en progreso' ")
+
+        else:
+
+            conta += 1
+
+            if conta == len(false_db):
+
+                print("Tarea no encontrada.")
 
 
 def taskcli():
@@ -131,7 +161,15 @@ def taskcli():
 
         elif args.comando == "list":
 
-            tar = listar_tareas()
+            listar_tareas()
+
+        elif args.comando == "mark-done":
+
+            marcar_tarea_hecha(args.id)
+
+        elif args.comando == "mark-in-progress":
+
+
 
 
 taskcli()
