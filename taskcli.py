@@ -80,6 +80,18 @@ def modificar_tarea(id: int, descripcion: str):
         
     print(false_db[id - 1])
 
+def eliminar_tarea(id:int):
+
+    for tarea in false_db:
+
+        if tarea.id == id:
+
+            false_db.remove(tarea)
+            print(f"tarea {tarea.id} eliminada exitosaente")
+            return True
+        
+    return False
+
 def listar_tareas():
 
     for tarea in false_db:
@@ -168,6 +180,12 @@ def taskcli():
             marcar_tarea_hecha(args.id)
 
         elif args.comando == "mark-in-progress":
+
+            marcar_tarea_en_progreso(args.id)
+
+        elif args.comando == "delete":
+
+            eliminar_tarea(args.id)
 
 
 
