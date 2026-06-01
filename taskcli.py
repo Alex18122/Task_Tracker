@@ -95,6 +95,17 @@ def listar_tareas():
 
             print(f"Fecha de modificacion : {tarea.updatedAt}")
 
+def marcar_tarea_hecha(id: int):
+
+    for tarea in false_db:
+
+        if tarea.id == id:
+
+            tarea.status = "Done"
+            false_db[id - 1] = tarea
+            print(f"Tarea {tarea.id} marcada como hecha ")
+
+
 def taskcli():
 
     print("Administrador De Tareas")
