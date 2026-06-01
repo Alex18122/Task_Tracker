@@ -94,9 +94,9 @@ def eliminar_tarea(id:int):
 
 def listar_tareas():
 
-    for tarea in false_db:
+    print("Lista de tareas")
 
-        print("Lista de tareas")
+    for tarea in false_db:
 
         print(f"id : {tarea.id}")
         print(f"Tarea : {tarea.description}")
@@ -106,6 +106,28 @@ def listar_tareas():
         if tarea.updatedAt is not None:
 
             print(f"Fecha de modificacion : {tarea.updatedAt}")
+
+    print("------------------")
+
+
+def listar_tareas_hechas():
+
+    print("lista de tareas hechas")
+
+    for tarea in false_db:
+
+        if tarea.status == "Done":
+
+            print(f"id : {tarea.id}")
+            print(f"Tarea : {tarea.description}")
+            print(f"Estado : {tarea.status}")
+            print(f"fecha de creacion : {tarea.createdAt}")
+
+            if tarea.updatedAt is not None:
+
+                print(f"fecha de modificacion : {tarea.updatedAt}")
+
+    print("------------------")
 
 def marcar_tarea_hecha(id: int):
 
@@ -186,6 +208,12 @@ def taskcli():
         elif args.comando == "delete":
 
             eliminar_tarea(args.id)
+
+        elif args.comando == "list done":
+
+            listar_tareas_hechas()
+
+
 
 
 
