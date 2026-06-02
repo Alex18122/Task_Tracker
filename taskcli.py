@@ -251,6 +251,14 @@ def taskcli():
 
             listar_tareas_hechas()
 
+        elif args.comando == "list todo":
+
+            listar_tareas_por_hacer()
+        
+        elif args.comando == "list in progress":
+
+            listar_tareas_en_prog()
+            
 
 
 
