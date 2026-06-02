@@ -206,12 +206,14 @@ def taskcli():
     while True:
         
         entrada = input(">> ")
+
         partes = shlex.split(entrada)  # divide la entrada en partes, respetando las comillas
         args = parser.parse_args(partes[1:])  # parsea las partes de la entrada, omitiendo el primer elemento que es "task-cli"
 
         if args.comando == "add":
 
             tar = agregar_tarea(args.descripcion)
+
             print(f"tarea {tar.id}:'{args.descripcion}' agregada a la lista")
             print(f"estado de la tarea {tar.id} : {tar.status}")
 
@@ -254,5 +256,10 @@ def taskcli():
         elif args.comando == "list in progress":
 
             listar_tareas_en_prog()
+
+        else:
+
+            print("comando desconocido, intenta de nuevo.")
+
 
 taskcli()
