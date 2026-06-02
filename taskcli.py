@@ -6,7 +6,6 @@ from pydantic import BaseModel, Field
 
 contador_id = 1
 
-
 class Data(BaseModel):
 
     id: int
@@ -15,9 +14,7 @@ class Data(BaseModel):
     createdAt: datetime = Field(default_factory=datetime.now)
     updatedAt: Optional[datetime] = None
 
-
 false_db = []
-
 
 def comandos_entrada_parser(data: Data):
 
@@ -51,9 +48,7 @@ def comandos_entrada_parser(data: Data):
 
     return parser
 
-
 parser = comandos_entrada_parser(Data)
-
 
 def agregar_tarea(descripcion: str):
 
@@ -64,7 +59,6 @@ def agregar_tarea(descripcion: str):
     contador_id += 1
     return tarea
 
-
 def modificar_tarea(id: int, descripcion: str):
 
     for tarea in false_db:
@@ -74,11 +68,9 @@ def modificar_tarea(id: int, descripcion: str):
             tarea.description = descripcion
             tarea.updatedAt = datetime.now()
             false_db[id - 1] = tarea
-            # print(false_db[id-1])
-
-            return tarea
-        
-    print(false_db[id - 1])
+            
+            return True
+    return False
 
 def eliminar_tarea(id:int):
 
@@ -108,7 +100,6 @@ def listar_tareas():
             print(f"Fecha de modificacion : {tarea.updatedAt}")
 
     print("------------------")
-
 
 def listar_tareas_hechas():
 
@@ -207,7 +198,6 @@ def marcar_tarea_en_progreso(id: int):
 
                 print("Tarea no encontrada.")
 
-
 def taskcli():
 
     print("Administrador De Tareas")
@@ -228,8 +218,14 @@ def taskcli():
         elif args.comando == "update":
 
             tar = modificar_tarea(args.id, args.descripcion)
-            print(f"tarea {args.id}:'{args.descripcion}' modificada exitosamente")
-            # print(false_db)
+
+            if tar:
+
+                print(f"tarea {args.id}:'{args.descripcion}' modificada exitosamente")
+
+            else:
+
+                print("id no encontrada")
 
         elif args.comando == "list":
 
@@ -258,10 +254,5 @@ def taskcli():
         elif args.comando == "list in progress":
 
             listar_tareas_en_prog()
-            
-
-
-
-
 
 taskcli()
