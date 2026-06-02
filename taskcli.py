@@ -129,6 +129,44 @@ def listar_tareas_hechas():
 
     print("------------------")
 
+def listar_tareas_por_hacer():
+
+    print("lista de tareas por hacer")
+
+    for tarea in false_db:
+
+        if tarea.status == "ToDo":
+
+            print(f"id : {tarea.id}")
+            print(f"Tarea : {tarea.description}")
+            print(f"Estado : {tarea.status}")
+            print(f"fecha de creacion : {tarea.createdAt}")
+
+            if tarea.updatedAt is not None:
+
+                print(f"fecha de modificacion : {tarea.updatedAt}")
+
+    print("------------------")
+
+def listar_tareas_en_prog():
+
+    print("lista de tareas en progreso")
+
+    for tarea in false_db:
+
+        if tarea.status == "In Progress":
+
+            print(f"id : {tarea.id}")
+            print(f"Tarea : {tarea.description}")
+            print(f"Estado : {tarea.status}")
+            print(f"fecha de creacion : {tarea.createdAt}")
+
+            if tarea.updatedAt is not None:
+
+                print(f"fecha de modificacion : {tarea.updatedAt}")
+
+    print("------------------")
+
 def marcar_tarea_hecha(id: int):
 
     for tarea in false_db:
