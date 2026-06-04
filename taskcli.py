@@ -1,5 +1,7 @@
 import argparse
 from datetime import datetime
+import json
+from pathlib import Path
 import shlex
 from typing import Optional
 from pydantic import BaseModel, Field
@@ -15,6 +17,26 @@ class Data(BaseModel):
     updatedAt: Optional[datetime] = None
 
 false_db = []
+
+ARCHIVO = "tareas.json"
+
+def guardar_tareas():
+
+    datos = [tarea.model_dump() for tarea in false_db ]
+    with open(ARCHIVO, "w") as f:
+        json.dump(datos, f , indent = 2, default=str)
+
+def cargar_tareas():
+
+    if not Path(ARCHIVO).exists():
+        
+        return []
+    
+    with open(ARCHIVO, "r") as f:
+
+        datos = json.load(f)
+
+    return [Data(**d) for d in datos]
 
 def comandos_entrada_parser(data: Data):
 
@@ -49,6 +71,7 @@ def comandos_entrada_parser(data: Data):
     return parser
 
 parser = comandos_entrada_parser(Data)
+tareas = cargar_tareas()
 
 def agregar_tarea(descripcion: str):
 
