@@ -16,8 +16,6 @@ class Data(BaseModel):
     createdAt: datetime = Field(default_factory=datetime.now)
     updatedAt: Optional[datetime] = None
 
-false_db = []
-
 ARCHIVO = "tareas.json"
 
 def guardar_tareas():
@@ -71,7 +69,7 @@ def comandos_entrada_parser(data: Data):
     return parser
 
 parser = comandos_entrada_parser(Data)
-tareas = cargar_tareas()
+false_db = cargar_tareas()
 
 def agregar_tarea(descripcion: str):
 
@@ -236,7 +234,7 @@ def taskcli():
         if args.comando == "add":
 
             tar = agregar_tarea(args.descripcion)
-
+            guardar_tareas()
             print(f"tarea {tar.id}:'{args.descripcion}' agregada a la lista")
             print(f"estado de la tarea {tar.id} : {tar.status}")
 
@@ -246,6 +244,7 @@ def taskcli():
 
             if tar:
 
+                guardar_tareas()
                 print(f"tarea {args.id}:'{args.descripcion}' modificada exitosamente")
 
             else:
@@ -259,19 +258,22 @@ def taskcli():
         elif args.comando == "mark-done":
 
             marcar_tarea_hecha(args.id)
+            guardar_tareas()
 
         elif args.comando == "mark-in-progress":
 
             marcar_tarea_en_progreso(args.id)
+            guardar_tareas()
 
         elif args.comando == "delete":
 
             eliminar_tarea(args.id)
+            guardar_tareas()
 
         elif args.comando == "list done":
 
             listar_tareas_hechas()
-
+        
         elif args.comando == "list todo":
 
             listar_tareas_por_hacer()
