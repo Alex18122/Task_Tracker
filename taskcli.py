@@ -107,11 +107,12 @@ def eliminar_tarea(id:int):
 
 def listar_tareas():
 
-    print("Lista de tareas")
+    print("\n Lista de tareas")
+    print("------------------------------")
 
     for tarea in false_db:
 
-        print(f"id : {tarea.id}")
+        print(f"id : {tarea.id}\n")
         print(f"Tarea : {tarea.description}")
         print(f"Estado : {tarea.status}")
         print(f"fecha de creacion : {tarea.createdAt}")
@@ -120,17 +121,18 @@ def listar_tareas():
 
             print(f"Fecha de modificacion : {tarea.updatedAt}")
 
-    print("------------------")
+        print("---------------------------------------------------------------") 
 
 def listar_tareas_hechas():
 
-    print("lista de tareas hechas")
+    print("\n lista de tareas hechas")
+    print("------------------------------")
 
     for tarea in false_db:
 
         if tarea.status == "Done":
 
-            print(f"id : {tarea.id}")
+            print(f"id : {tarea.id}\n")
             print(f"Tarea : {tarea.description}")
             print(f"Estado : {tarea.status}")
             print(f"fecha de creacion : {tarea.createdAt}")
@@ -139,17 +141,19 @@ def listar_tareas_hechas():
 
                 print(f"fecha de modificacion : {tarea.updatedAt}")
 
-    print("------------------")
+        print("---------------------------------------------------------------") 
 
 def listar_tareas_por_hacer():
 
-    print("lista de tareas por hacer")
+    print("\n lista de tareas por hacer")
+    print("------------------------------")
 
     for tarea in false_db:
 
+        
         if tarea.status == "ToDo":
 
-            print(f"id : {tarea.id}")
+            print(f"id : {tarea.id}\n")
             print(f"Tarea : {tarea.description}")
             print(f"Estado : {tarea.status}")
             print(f"fecha de creacion : {tarea.createdAt}")
@@ -157,27 +161,28 @@ def listar_tareas_por_hacer():
             if tarea.updatedAt is not None:
 
                 print(f"fecha de modificacion : {tarea.updatedAt}")
-
-    print("------------------")
+        
+        print("---------------------------------------------------------------") 
 
 def listar_tareas_en_prog():
 
-    print("lista de tareas en progreso")
+    print("\n lista de tareas en progreso")
+    print("------------------------------")
 
     for tarea in false_db:
 
         if tarea.status == "In Progress":
 
-            print(f"id : {tarea.id}")
+            print(f"id : {tarea.id}\n")
             print(f"Tarea : {tarea.description}")
             print(f"Estado : {tarea.status}")
             print(f"fecha de creacion : {tarea.createdAt}")
 
             if tarea.updatedAt is not None:
 
-                print(f"fecha de modificacion : {tarea.updatedAt}")
+                print(f"fecha de modificacion : {tarea.updatedAt}")  
 
-    print("------------------")
+        print("---------------------------------------------------------------")  
 
 def marcar_tarea_hecha(id: int):
 
