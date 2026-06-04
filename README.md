@@ -1,0 +1,1 @@
+Task Tracker es una aplicacion con interface en linea de comandos que sirve para guardar tareas para hacer, marcarlas como hechas o en progreso. Esto es un proyecto para https://roadmap.sh/projects/task-tracker
