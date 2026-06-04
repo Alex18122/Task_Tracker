@@ -6,7 +6,7 @@ import shlex
 from typing import Optional
 from pydantic import BaseModel, Field
 
-contador_id = 1
+contador_id: int
 
 class Data(BaseModel):
 
@@ -71,13 +71,20 @@ def comandos_entrada_parser(data: Data):
 parser = comandos_entrada_parser(Data)
 false_db = cargar_tareas()
 
+def generar_id():
+
+    if not false_db:
+
+        return 1
+
+    return max(tar.id for tar in false_db) + 1
+
 def agregar_tarea(descripcion: str):
 
-    global contador_id
-    tarea = Data(id=contador_id, description=descripcion, status="ToDo")
+    tarea = Data(id=generar_id(), description=descripcion, status="ToDo")
 
     false_db.append(tarea)
-    contador_id += 1
+
     return tarea
 
 def modificar_tarea(id: int, descripcion: str):
@@ -290,6 +297,5 @@ def taskcli():
         else:
 
             print("comando desconocido, intenta de nuevo.")
-
 
 taskcli()
