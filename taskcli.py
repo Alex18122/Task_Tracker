@@ -36,7 +36,7 @@ def cargar_tareas():
 
     return [Data(**d) for d in datos]
 
-def comandos_entrada_parser(data: Data):
+def comandos_entrada_parser():
 
     parser = argparse.ArgumentParser(prog="task-cli")
     subparser = parser.add_subparsers(dest="comando")
@@ -68,7 +68,7 @@ def comandos_entrada_parser(data: Data):
 
     return parser
 
-parser = comandos_entrada_parser(Data)
+parser = comandos_entrada_parser()
 false_db = cargar_tareas()
 
 def generar_id():
